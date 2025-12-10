@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+    <link rel="icon" href="https://raw.githubusercontent.com/ktl10y/bio-gel/refs/heads/main/logo-for-biogelx%20-%20biogelx-logo.png" type="image/png" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioGel X - Arkeolojik Koruma Teknolojisi</title>
@@ -1072,32 +1073,246 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Navigation */
+#navbar {
+    background-color: white;
+    box-shadow: var(--shadow);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 10px 0; /* Yükseklik biraz azaltıldı */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: relative; /* Logoların konumlandırması için */
+}
+
+/* Logo Linkleri (Logoları sarmak için) */
+.logo-link {
+    display: flex;
+    align-items: center;
+    z-index: 2; /* Menünün üstünde görünsün */
+}
+
+/* Logo Görselleri için Ortak Stil */
+.logo-school,
+.logo-team {
+    height: 45px; /* Sabit yükseklik, orantı korunur */
+    width: auto; /* Genişlik otomatik ayarlanır */
+    object-fit: contain; /* Logonun tamamı görünür, kesilmez */
+    transition: var(--transition);
+}
+
+/* Okul Logosu - Sol */
+.logo-school {
+    margin-right: auto; /* Sola yaslar */
+}
+
+/* Takım Logosu - Sağ */
+.logo-team {
+    margin-left: auto; /* Sağa yaslar */
+}
+
+/* Logo Hover Efekti */
+.logo-school:hover,
+.logo-team:hover {
+    transform: scale(1.05); /* Hafif büyütme efekti */
+}
+
+/* Ortadaki Ana Proje Logosu */
+.logo-main {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    position: absolute; /* Ortalamak için */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.logo-main i {
+    color: var(--secondary);
+    margin-right: 10px;
+    font-size: 2rem;
+}
+
+.logo-text strong {
+    color: var(--secondary);
+}
+
+/* Navigasyon Menüsü */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    position: absolute; /* Ortadaki logoyla çakışmaması için */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.nav-menu li {
+    margin-left: 1.5rem; /* Aralık biraz azaltıldı */
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    transition: var(--transition);
+    padding: 0.5rem 0;
+    position: relative;
+    white-space: nowrap; /* Metin alt satıra kaymasın */
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--secondary);
+}
+
+.nav-menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--secondary);
+}
+
+.demo-btn {
+    background: linear-gradient(135deg, var(--secondary), #0097a7);
+    color: white !important;
+    padding: 8px 20px !important;
+    border-radius: 25px;
+    transition: var(--transition) !important;
+}
+
+.demo-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 172, 193, 0.3);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 3; /* Diğer ögelerin üstünde */
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary);
+    margin: 3px 0;
+    transition: var(--transition);
+}
+
+/* Responsive (Mobil) Düzenlemeler */
+@media (max-width: 1100px) {
+    .nav-menu {
+        position: static;
+        transform: none;
+        margin: 0 20px;
+    }
+    .logo-main {
+        position: static;
+        transform: none;
+        margin: 0 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px; /* Header yüksekliğine göre ayarlandı */
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 2rem 0;
+        z-index: 999;
+        margin: 0;
+    }
+    .nav-menu.active {
+        left: 0;
+    }
+    .nav-menu li {
+        margin: 1.5rem 0;
+    }
+    /* Mobilde logoları biraz küçült */
+    .logo-school,
+    .logo-team {
+        height: 38px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-main {
+        font-size: 1.5rem;
+    }
+    .logo-main i {
+        font-size: 1.7rem;
+    }
+    /* Çok küçük ekranlarda logoları sakla, sadece proje logosu kalsın */
+    .logo-school,
+    .logo-team {
+        height: 0;
+        width: 0;
+        overflow: hidden;
+    }
+}
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-prescription-bottle-alt"></i>
-                <span class="logo-text">BioGel <strong>X</strong></span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#hero" class="active">Ana Sayfa</a></li>
-                <li><a href="#solution">Çözüm</a></li>
-                <li><a href="#how-it-works">Nasıl Çalışır</a></li>
-                <li><a href="#sensor-data">Sensör Verileri</a></li>
-                <li><a href="#qr-system">QR Sistem</a></li>
-                <li><a href="#team">Ekip</a></li>
-                <li><a href="#contact" class="demo-btn">İletişim</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+   <!-- Navigation -->
+<nav id="navbar">
+    <div class="container nav-container">
+        <!-- Sol Tarafta: Okul Logosu -->
+        <a href="https://www.isikokullari.k12.tr" class="logo-link" target="_blank" title="Işık Okulları Ana Sayfa">
+            <img src="https://raw.githubusercontent.com/ktl10y/bio-gel/refs/heads/main/logo-for-biogelx%20-%20isikschools-logo.png" alt="Işık Okulları Logosu" class="logo-school">
+        </a>
+
+        <!-- Ortada: Proje Logosu ve Adı -->
+        <div class="logo-main">
+            <i class="fas fa-prescription-bottle-alt"></i>
+            <span class="logo-text">BioGel <strong>X</strong></span>
         </div>
-    </nav>
+
+        <!-- Sağ Tarafta: Takım Logosu -->
+        <a href="#" class="logo-link" title="Light Side Pro Takımı">
+            <img src="https://raw.githubusercontent.com/ktl10y/bio-gel/refs/heads/main/logo-for-biogelx%20-%20lightsidepro-logo.png" alt="Light Side Pro Takım Logosu" class="logo-team">
+        </a>
+
+        <!-- Navigasyon Menüsü -->
+        <ul class="nav-menu">
+            <li><a href="#hero" class="active">Ana Sayfa</a></li>
+            <li><a href="#solution">Çözüm</a></li>
+            <li><a href="#how-it-works">Nasıl Çalışır</a></li>
+            <li><a href="#sensor-data">Sensör Verileri</a></li>
+            <li><a href="#qr-system">QR Sistem</a></li>
+            <li><a href="#team">Ekip</a></li>
+            <li><a href="#contact" class="demo-btn">İletişim</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <section id="hero">
