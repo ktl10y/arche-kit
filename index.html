@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <link rel="icon" href="https://raw.githubusercontent.com/ktl10y/bio-gel/refs/heads/main/logo-for-biogelx%20-%20biogelx-logo.png" type="image/png" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioGel X - Arkeolojik Koruma Teknolojisi</title>
+    <title>ArchaKit | Arkeolojik Eser Koruma ve Taşıma Sistemi</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/ktl10y/bio-gel/refs/heads/main/logo-for-biogelx%20-%20biogelx-logo.png" type="image/png">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Reset ve Temel Stiller */
+        /* ==== GLOBAL STYLES ==== */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #1abc9c;
+            --light: #f8f9fa;
+            --dark: #34495e;
+            --gray: #7f8c8d;
+            --light-gray: #ecf0f1;
+            --success: #27ae60;
+            --border: #e0e0e0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #1a237e;
-            --secondary: #00acc1;
-            --accent: #ff4081;
-            --success: #4caf50;
-            --light: #f5f5f5;
-            --dark: #212121;
-            --gray: #757575;
-            --light-gray: #e0e0e0;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
         }
 
         html {
@@ -34,466 +38,531 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
+            color: var(--primary);
+            background-color: #ffffff;
             line-height: 1.6;
-            color: #333;
-            background-color: #fff;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             font-weight: 600;
             line-height: 1.3;
+            margin-bottom: 1rem;
         }
 
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .highlight {
-            color: var(--secondary);
+            padding: 0 24px;
         }
 
         section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .section-title {
+            font-size: 2.8rem;
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
         }
 
         .section-subtitle {
             text-align: center;
             color: var(--gray);
+            font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 3rem;
-            font-size: 1.1rem;
+            font-weight: 400;
         }
 
-        .btn-primary, .btn-secondary {
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
+        .highlight {
+            color: var(--accent);
+        }
+
+        /* ==== BUTTONS ==== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            font-size: 1rem;
             font-weight: 500;
+            text-decoration: none;
+            border-radius: 6px;
             transition: var(--transition);
-            display: inline-block;
             cursor: pointer;
             border: none;
-            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            gap: 10px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--secondary), #0097a7);
+            background-color: var(--accent);
             color: white;
-            box-shadow: 0 4px 15px rgba(0, 172, 193, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 172, 193, 0.4);
+            background-color: #16a085;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         .btn-secondary {
             background-color: transparent;
-            color: var(--secondary);
-            border: 2px solid var(--secondary);
+            color: var(--accent);
+            border: 2px solid var(--accent);
         }
 
         .btn-secondary:hover {
-            background-color: var(--secondary);
+            background-color: var(--accent);
             color: white;
+            transform: translateY(-2px);
         }
 
-        /* Navigation */
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ==== NAVIGATION ==== */
         #navbar {
-            background-color: white;
-            box-shadow: var(--shadow);
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             z-index: 1000;
-            padding: 15px 0;
+            padding: 20px 0;
+            transition: var(--transition);
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            font-size: 1.8rem;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary);
         }
 
-        .logo i {
-            color: var(--secondary);
-            margin-right: 10px;
-            font-size: 2rem;
-        }
-
-        .logo-text strong {
-            color: var(--secondary);
+        .logo-text span {
+            color: var(--accent);
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-        }
-
-        .nav-menu li {
-            margin-left: 2rem;
+            gap: 40px;
+            align-items: center;
         }
 
         .nav-menu a {
             text-decoration: none;
             color: var(--primary);
             font-weight: 500;
+            font-size: 1rem;
             transition: var(--transition);
-            padding: 0.5rem 0;
             position: relative;
+            padding: 8px 0;
         }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            color: var(--secondary);
+        .nav-menu a:hover {
+            color: var(--accent);
         }
 
-        .nav-menu a.active::after {
+        .nav-menu a::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
             width: 100%;
-            height: 3px;
-            background-color: var(--secondary);
         }
 
-        .demo-btn {
-            background: linear-gradient(135deg, var(--secondary), #0097a7);
-            color: white !important;
-            padding: 8px 20px !important;
-            border-radius: 25px;
-            transition: var(--transition) !important;
+        .nav-menu a.active {
+            color: var(--accent);
         }
 
-        .demo-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 172, 193, 0.3);
+        .nav-cta {
+            margin-left: 20px;
         }
 
         .hamburger {
             display: none;
             flex-direction: column;
+            gap: 5px;
             cursor: pointer;
         }
 
         .hamburger span {
             width: 25px;
-            height: 3px;
-            background-color: var(--primary);
-            margin: 3px 0;
+            height: 2px;
+            background: var(--primary);
             transition: var(--transition);
         }
 
-        /* Hero Section */
+        /* ==== HERO SECTION ==== */
         #hero {
-            padding-top: 120px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 60px;
             align-items: center;
         }
 
+        .hero-content {
+            max-width: 600px;
+        }
+
         .hero-title {
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
+            line-height: 1.2;
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: var(--gray);
             margin-bottom: 2.5rem;
+            line-height: 1.6;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 20px;
             flex-wrap: wrap;
+            margin-bottom: 3rem;
         }
 
-        .hero-image {
-            position: relative;
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .stat-item {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.95rem;
         }
 
         .hero-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kit-illustration {
+            width: 100%;
+            height: 100%;
             background: white;
             border-radius: 20px;
-            padding: 30px;
             box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
-            height: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .flask-container {
-            position: relative;
-            width: 150px;
-            height: 200px;
-            margin-bottom: 20px;
-        }
-
-        .flask {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-            border-radius: 50% 50% 30% 30%;
-            position: relative;
-            border: 8px solid white;
-            box-shadow: inset 0 0 20px rgba(0, 172, 193, 0.2);
-        }
-
-        .flask::after {
-            content: '';
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            right: 10%;
-            bottom: 10%;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50% 50% 30% 30%;
-        }
-
-        .bubble {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            animation: float 3s infinite ease-in-out;
-        }
-
-        .bubble:nth-child(1) { width: 20px; height: 20px; top: 30%; left: 30%; animation-delay: 0s; }
-        .bubble:nth-child(2) { width: 15px; height: 15px; top: 50%; left: 40%; animation-delay: 0.5s; }
-        .bubble:nth-child(3) { width: 25px; height: 25px; top: 40%; right: 30%; animation-delay: 1s; }
-        .bubble:nth-child(4) { width: 18px; height: 18px; bottom: 30%; left: 35%; animation-delay: 1.5s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Solution Section */
-        #solution {
-            background-color: white;
-        }
-
-        .solution-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .solution-card {
-            background-color: white;
-            border-radius: 15px;
-            padding: 2.5rem 2rem;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-top: 5px solid var(--secondary);
-            text-align: center;
-        }
-
-        .solution-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, var(--secondary), #0097a7);
         }
 
-        .card-icon i {
-            font-size: 2.5rem;
-            color: white;
-        }
-
-        .solution-card h3 {
-            color: var(--primary);
-            margin-bottom: 1.2rem;
-            font-size: 1.8rem;
-        }
-
-        .solution-card p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .card-features {
-            list-style: none;
-            text-align: left;
-            padding: 0 20px;
-        }
-
-        .card-features li {
-            margin-bottom: 0.8rem;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-        }
-
-        .card-features i {
-            color: var(--success);
-            margin-right: 0.8rem;
-            font-size: 1.2rem;
-        }
-
-        /* How It Works */
-        #how-it-works {
-            background-color: #f8f9fa;
-        }
-
-        .timeline {
-            max-width: 800px;
-            margin: 3rem auto 0;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--secondary), #0097a7);
-        }
-
-        .timeline-item {
-            display: flex;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .timeline-number {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--secondary), #0097a7);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-right: 2rem;
-            flex-shrink: 0;
-            z-index: 1;
-            box-shadow: 0 4px 15px rgba(0, 172, 193, 0.4);
-        }
-
-        .timeline-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            flex-grow: 1;
-        }
-
-        .timeline-content h3 {
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-            font-size: 1.5rem;
-        }
-
-        /* Sensor Data Section */
-        #sensor-data {
-            background-color: white;
-        }
-
-        .demo-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        .control-btn {
-            padding: 12px 24px;
-            background-color: var(--light);
-            border: none;
-            border-radius: 25px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 1rem;
-        }
-
-        .control-btn.active,
-        .control-btn:hover {
-            background: linear-gradient(135deg, var(--secondary), #0097a7);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 172, 193, 0.3);
-        }
-
-        .chart-container {
-            background-color: white;
-            border-radius: 15px;
-            padding: 2.5rem;
-            box-shadow: var(--shadow);
-            margin-bottom: 2.5rem;
+        .kit-diagram {
+            width: 300px;
             height: 400px;
             position: relative;
         }
 
-        .chart-legends {
+        .kit-outline {
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--accent);
+            border-radius: 15px;
+            position: relative;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+        }
+
+        .artifact {
+            position: absolute;
+            width: 200px;
+            height: 250px;
+            background: linear-gradient(135deg, #e9d8a6, #caa971);
+            border-radius: 8px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .jel-layer {
+            position: absolute;
+            width: 260px;
+            height: 340px;
+            background: rgba(26, 188, 156, 0.1);
+            border: 2px dashed rgba(26, 188, 156, 0.3);
+            border-radius: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .sensor-indicator {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+        }
+
+        /* ==== FEATURES SECTION ==== */
+        #features {
+            background-color: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            color: var(--dark);
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list i {
+            color: var(--success);
+            font-size: 1rem;
+        }
+
+        /* ==== TECHNOLOGY SECTION ==== */
+        #technology {
+            background: white;
+        }
+
+        .tech-demonstration {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .tech-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .tech-content p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .tech-specs {
+            margin-top: 40px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .spec-value {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .tech-visual {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        /* ==== DATA SECTION ==== */
+        #data {
+            background-color: var(--light);
+        }
+
+        .data-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            height: 400px;
+        }
+
+        .data-legend {
             display: flex;
             justify-content: center;
-            gap: 3rem;
-            margin-bottom: 3rem;
+            gap: 40px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
 
-        .legend {
+        .legend-item {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            padding: 10px 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            gap: 10px;
         }
 
         .legend-color {
@@ -503,362 +572,326 @@
         }
 
         .legend-text {
-            color: var(--dark);
+            color: var(--primary);
             font-weight: 500;
         }
 
-        .sensor-stats {
+        .data-points {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 20px;
         }
 
-        .stat-card {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 15px;
+        .data-point {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .data-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .data-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* ==== WORKFLOW SECTION ==== */
+        #workflow {
+            background: white;
+        }
+
+        .workflow-steps {
+            max-width: 800px;
+            margin: 60px auto 0;
+            position: relative;
+        }
+
+        .workflow-steps::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--light-gray);
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-right: 30px;
+            flex-shrink: 0;
+            z-index: 1;
+            box-shadow: var(--shadow);
+        }
+
+        .step-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            flex-grow: 1;
+            border: 1px solid var(--border);
+        }
+
+        .step-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .step-content p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* ==== TEAM SECTION ==== */
+        #team {
+            background-color: var(--light);
+        }
+
+        .team-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .team-intro p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
             box-shadow: var(--shadow);
             text-align: center;
             transition: var(--transition);
+            border: 1px solid var(--border);
         }
 
-        .stat-card:hover {
+        .team-member:hover {
             transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
         }
 
-        .stat-card h4 {
-            color: var(--gray);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+        .member-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
         }
 
-        .stat-value {
-            font-size: 3rem;
-            font-weight: bold;
+        .member-name {
+            font-size: 1.3rem;
             color: var(--primary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 8px;
         }
 
-        .stat-bar {
-            height: 12px;
-            background-color: var(--light-gray);
-            border-radius: 6px;
-            overflow: hidden;
+        .member-role {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1rem;
         }
 
-        .stat-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary), #0097a7);
-            border-radius: 6px;
+        .member-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        /* QR Code Section */
-        #qr-system {
-            background-color: #f8f9fa;
+        .member-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .qr-demo {
+        .member-tag {
+            background: var(--light-gray);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* ==== FLL SECTION ==== */
+        #fll {
+            background: white;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .fll-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 60px;
             align-items: center;
         }
 
-        .qr-content h2 {
-            text-align: left;
-            margin-bottom: 1.5rem;
-        }
-
-        .qr-content p {
-            color: var(--gray);
-            margin-bottom: 2.5rem;
-            font-size: 1.2rem;
-        }
-
-        .qr-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .qr-feature {
-            text-align: center;
-            padding: 1.5rem 1rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .qr-feature:hover {
-            transform: translateY(-5px);
-        }
-
-        .qr-feature i {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        .qr-feature h4 {
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
-        }
-
-        .qr-feature p {
-            font-size: 1rem;
-            color: var(--gray);
-            margin: 0;
-        }
-
-        .qr-code-container {
-            display: flex;
-            justify-content: center;
+        .fll-badge {
+            display: inline-flex;
             align-items: center;
-            height: 100%;
-        }
-
-        .qr-code {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            max-width: 320px;
-            width: 100%;
-        }
-
-        .qr-visual {
-            width: 220px;
-            height: 220px;
-            background: #f8f9fa;
-            border: 2px dashed var(--light-gray);
-            border-radius: 10px;
-            margin: 0 auto 1.5rem;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .qr-pattern {
-            width: 200px;
-            height: 200px;
-            position: relative;
-            background: repeating-linear-gradient(
-                0deg,
-                #000 0px, #000 10px,
-                transparent 10px, transparent 20px
-            );
-            background-size: 200px 20px;
-            animation: scan 2s linear infinite;
-        }
-
-        .qr-pattern::before {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 10px solid var(--dark);
-            top: 20px;
-            left: 20px;
-            border-radius: 15px;
-        }
-
-        .qr-pattern::after {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 4px;
-            background: var(--secondary);
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-        }
-
-        @keyframes scan {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 20px; }
-        }
-
-        .qr-info {
-            padding: 1rem;
-        }
-
-        .qr-info h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.4rem;
-        }
-
-        .qr-info p {
-            color: var(--gray);
-            margin-bottom: 0.5rem;
-        }
-
-        .qr-link {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            word-break: break-all;
-            font-family: monospace;
-            background: #f8f9fa;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        /* Team Section */
-        #team {
-            background-color: white;
-        }
-
-        .team-members {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .team-card {
-            background-color: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .team-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .team-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--secondary), #0097a7);
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
+            gap: 10px;
+            background: var(--accent);
             color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-bottom: 30px;
         }
 
-        .team-card h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
+        .core-values {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
         }
 
-        .team-role {
-            color: var(--secondary);
-            font-weight: 500;
-            margin-bottom: 1rem;
+        .value-item {
+            padding: 20px;
+            background: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .value-item h4 {
             font-size: 1.1rem;
-        }
-
-        .team-desc {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .team-skills {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background-color: #e3f2fd;
             color: var(--primary);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
+            margin-bottom: 8px;
         }
 
-        /* Contact Section */
+        .value-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* ==== CONTACT SECTION ==== */
         #contact {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            background-color: var(--light);
         }
 
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
+            gap: 60px;
         }
 
-        .contact-info h2 {
-            text-align: left;
-            margin-bottom: 1.5rem;
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
         }
 
         .contact-info p {
             color: var(--gray);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.7;
         }
 
-        .contact-details {
-            margin-top: 2rem;
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
+            gap: 20px;
         }
 
         .contact-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--secondary), #0097a7);
-            border-radius: 50%;
+            background: var(--accent);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 1rem;
             color: white;
-            font-size: 1.3rem;
-        }
-
-        .contact-text h4 {
-            color: var(--primary);
-            margin-bottom: 0.3rem;
             font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
-        .contact-form {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: 20px;
+        .contact-details h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .contact-details p {
+            color: var(--gray);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .contact-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
             box-shadow: var(--shadow);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
             color: var(--primary);
+            margin-bottom: 8px;
             font-weight: 500;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--light-gray);
-            border-radius: 10px;
-            font-family: 'Roboto', sans-serif;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
             font-size: 1rem;
             transition: var(--transition);
         }
@@ -866,8 +899,8 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(0, 172, 193, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
         }
 
         .form-group textarea {
@@ -875,128 +908,144 @@
             resize: vertical;
         }
 
-        /* Footer */
+        /* ==== FOOTER ==== */
         footer {
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
-            padding: 4rem 0 2rem;
+            padding: 60px 0 30px;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
+            gap: 50px;
+            margin-bottom: 50px;
         }
 
-        .footer-section h4 {
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
             color: white;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-
-        .footer-section p {
-            color: #bdc3c7;
-            margin-bottom: 1rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-section ul li a {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-section ul li a:hover {
-            color: white;
-        }
-
-        .social-icons {
+            margin-bottom: 20px;
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            align-items: center;
+            gap: 10px;
         }
 
-        .social-icons a {
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
             width: 40px;
             height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
+            text-decoration: none;
             transition: var(--transition);
         }
 
-        .social-icons a:hover {
-            background-color: var(--secondary);
+        .social-link:hover {
+            background: var(--accent);
             transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #bdc3c7;
+            color: rgba(255, 255, 255, 0.5);
             font-size: 0.9rem;
         }
 
-        .fll-badge {
-            background-color: var(--accent);
+        .fll-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-left: 10px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-left: 15px;
+            font-weight: 600;
+            font-size: 0.85rem;
         }
 
-        /* Responsive Tasarım */
+        /* ==== RESPONSIVE DESIGN ==== */
         @media (max-width: 992px) {
             .hero-container,
-            .qr-demo,
+            .tech-demonstration,
+            .fll-content,
             .contact-container {
                 grid-template-columns: 1fr;
             }
             
-            .hero {
-                padding: 100px 0 60px;
-            }
-            
-            .hero-title {
-                font-size: 2.5rem;
+            .hero-visual {
+                order: -1;
+                height: 400px;
             }
             
             .section-title {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
             }
         }
 
         @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-            
             .nav-menu {
                 position: fixed;
-                left: -100%;
                 top: 80px;
+                left: -100%;
                 flex-direction: column;
-                background-color: white;
+                background: white;
                 width: 100%;
-                text-align: center;
+                padding: 40px 24px;
+                box-shadow: var(--shadow);
                 transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 2rem 0;
+                gap: 30px;
                 z-index: 999;
             }
             
@@ -1004,562 +1053,382 @@
                 left: 0;
             }
             
-            .nav-menu li {
-                margin: 1.5rem 0;
+            .hamburger {
+                display: flex;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+            
+            .nav-cta {
+                margin-left: 0;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
             }
             
             .hero-title {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .workflow-steps::before {
+                left: 30px;
+            }
+            
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin-right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .core-values {
+                grid-template-columns: 1fr;
             }
             
             .section-title {
                 font-size: 2rem;
             }
-            
-            .timeline::before {
-                left: 20px;
-            }
-            
-            .timeline-number {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-            
-            .demo-controls {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .control-btn {
-                width: 200px;
-            }
-            
-            .chart-container {
-                padding: 1.5rem;
-                height: 350px;
-            }
         }
 
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .solution-cards,
-            .team-members,
-            .qr-features {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animasyonlar */
+        /* ==== ANIMATIONS ==== */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        /* Navigation */
-#navbar {
-    background-color: white;
-    box-shadow: var(--shadow);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    padding: 10px 0; /* Yükseklik biraz azaltıldı */
-}
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    position: relative; /* Logoların konumlandırması için */
-}
+        /* ==== SCROLLBAR ==== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
-/* Logo Linkleri (Logoları sarmak için) */
-.logo-link {
-    display: flex;
-    align-items: center;
-    z-index: 2; /* Menünün üstünde görünsün */
-}
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
 
-/* Logo Görselleri için Ortak Stil */
-.logo-school,
-.logo-team {
-    height: 45px; /* Sabit yükseklik, orantı korunur */
-    width: auto; /* Genişlik otomatik ayarlanır */
-    object-fit: contain; /* Logonun tamamı görünür, kesilmez */
-    transition: var(--transition);
-}
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
 
-/* Okul Logosu - Sol */
-.logo-school {
-    margin-right: auto; /* Sola yaslar */
-}
-
-/* Takım Logosu - Sağ */
-.logo-team {
-    margin-left: auto; /* Sağa yaslar */
-}
-
-/* Logo Hover Efekti */
-.logo-school:hover,
-.logo-team:hover {
-    transform: scale(1.05); /* Hafif büyütme efekti */
-}
-
-/* Ortadaki Ana Proje Logosu */
-.logo-main {
-    display: flex;
-    align-items: center;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--primary);
-    position: absolute; /* Ortalamak için */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-}
-
-.logo-main i {
-    color: var(--secondary);
-    margin-right: 10px;
-    font-size: 2rem;
-}
-
-.logo-text strong {
-    color: var(--secondary);
-}
-
-/* Navigasyon Menüsü */
-.nav-menu {
-    display: flex;
-    list-style: none;
-    position: absolute; /* Ortadaki logoyla çakışmaması için */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.nav-menu li {
-    margin-left: 1.5rem; /* Aralık biraz azaltıldı */
-}
-
-.nav-menu a {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 500;
-    transition: var(--transition);
-    padding: 0.5rem 0;
-    position: relative;
-    white-space: nowrap; /* Metin alt satıra kaymasın */
-}
-
-.nav-menu a:hover,
-.nav-menu a.active {
-    color: var(--secondary);
-}
-
-.nav-menu a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: var(--secondary);
-}
-
-.demo-btn {
-    background: linear-gradient(135deg, var(--secondary), #0097a7);
-    color: white !important;
-    padding: 8px 20px !important;
-    border-radius: 25px;
-    transition: var(--transition) !important;
-}
-
-.demo-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 172, 193, 0.3);
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    z-index: 3; /* Diğer ögelerin üstünde */
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--primary);
-    margin: 3px 0;
-    transition: var(--transition);
-}
-
-/* Responsive (Mobil) Düzenlemeler */
-@media (max-width: 1100px) {
-    .nav-menu {
-        position: static;
-        transform: none;
-        margin: 0 20px;
-    }
-    .logo-main {
-        position: static;
-        transform: none;
-        margin: 0 15px;
-    }
-}
-
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 70px; /* Header yüksekliğine göre ayarlandı */
-        flex-direction: column;
-        background-color: white;
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-        padding: 2rem 0;
-        z-index: 999;
-        margin: 0;
-    }
-    .nav-menu.active {
-        left: 0;
-    }
-    .nav-menu li {
-        margin: 1.5rem 0;
-    }
-    /* Mobilde logoları biraz küçült */
-    .logo-school,
-    .logo-team {
-        height: 38px;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo-main {
-        font-size: 1.5rem;
-    }
-    .logo-main i {
-        font-size: 1.7rem;
-    }
-    /* Çok küçük ekranlarda logoları sakla, sadece proje logosu kalsın */
-    .logo-school,
-    .logo-team {
-        height: 0;
-        width: 0;
-        overflow: hidden;
-    }
-}
+        ::-webkit-scrollbar-thumb:hover {
+            background: #16a085;
+        }
     </style>
 </head>
 <body>
-   <!-- Navigation -->
-<nav id="navbar">
-    <div class="container nav-container">
-        <!-- Sol Tarafta: Okul Logosu -->
-        <a href="https://www.isikokullari.k12.tr" class="logo-link" target="_blank" title="Işık Okulları Ana Sayfa">
-            <img src="https://raw.githubusercontent.com/ktl10y/bio-gel/refs/heads/main/logo-for-biogelx%20-%20isikschools-logo.png" alt="Işık Okulları Logosu" class="logo-school">
-        </a>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-archway"></i>
+                </div>
+                <div class="logo-text">Archa<span>Kit</span></div>
+            </a>
 
-        <!-- Sağ Tarafta: Takım Logosu -->
-        <a href="#" class="logo-link" title="Light Side Pro Takımı">
-            <img src="https://raw.githubusercontent.com/ktl10y/bio-gel/refs/heads/main/logo-for-biogelx%20-%20lightsidepro-logo.png" alt="Light Side Pro Takım Logosu" class="logo-team">
-        </a>
+            <ul class="nav-menu">
+                <li><a href="#hero" class="active">Ana Sayfa</a></li>
+                <li><a href="#features">Özellikler</a></li>
+                <li><a href="#technology">Teknoloji</a></li>
+                <li><a href="#data">Veriler</a></li>
+                <li><a href="#team">Ekip</a></li>
+                <li><a href="#contact" class="nav-cta">
+                    <span class="btn btn-primary">Demo Talep</span>
+                </a></li>
+            </ul>
 
-        <!-- Navigasyon Menüsü -->
-        <ul class="nav-menu">
-            <li><a href="#hero" class="active">Ana Sayfa</a></li>
-            <li><a href="#solution">Çözüm</a></li>
-            <li><a href="#how-it-works">Nasıl Çalışır</a></li>
-            <li><a href="#sensor-data">Sensör Verileri</a></li>
-            <li><a href="#qr-system">QR Sistem</a></li>
-            <li><a href="#team">Ekip</a></li>
-            <li><a href="#contact" class="demo-btn">İletişim</a></li>
-        </ul>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Hero Section -->
     <section id="hero">
         <div class="container hero-container">
             <div class="hero-content">
-                <i class="fas fa-prescription-bottle-alt"></i>
-            <span class="logo-text">BioGel <strong>X</strong></span>
-                <h1 class="hero-title">Arkeolojik Mirası <span class="highlight">Geleceğe Koruyoruz</span></h1>
-                <p class="hero-subtitle">BioGel X, kırılgan eserlerin kazı anından itibaren bozulmasını önleyen üç parçalı yenilikçi koruma sistemidir.</p>
+                <h1 class="hero-title">Arkeolojik Eserleri <span class="highlight">Güvenle Koruyun ve Taşıyın</span></h1>
+                <p class="hero-subtitle">
+                    ArchaKit, kırılgan arkeolojik eserlerin kazı alanından laboratuvara güvenli nakliyesi için geliştirilmiş 
+                    üç parçalı bir koruma sistemidir.
+                </p>
+                
                 <div class="hero-buttons">
-                    <a href="#solution" class="btn-primary">Çözümümüzü İnceleyin</a>
-                    <a href="#sensor-data" class="btn-secondary">Canlı Verileri Görün</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="hero-visual">
-                    <div class="flask-container">
-                        <div class="flask">
-                            <div class="bubble"></div>
-                            <div class="bubble"></div>
-                            <div class="bubble"></div>
-                            <div class="bubble"></div>
-                        </div>
-                    </div>
-                    <h3>BioGel Koruma Jeli</h3>
-                    <p>Biyolojik, güvenli ve yüksek verimli</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solution Section -->
-    <section id="solution" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">Üç Parçalı <span class="highlight">Bütünsel Çözüm</span></h2>
-            <p class="section-subtitle">BioGel X, arkeologların sahada karşılaştığı en büyük soruna kapsamlı bir çözüm sunar.</p>
-            
-            <div class="solution-cards">
-                <!-- Card 1 -->
-                <div class="solution-card">
-                    <div class="card-icon">
-                        <i class="fas fa-prescription-bottle-alt"></i>
-                    </div>
-                    <h3>1. BioGel</h3>
-                    <p>Biyolojik koruma jeli ile eserler anında stabilize edilir. Nem ve sıcaklık kontrolü sağlanır.</p>
-                    <ul class="card-features">
-                        <li><i class="fas fa-check"></i> Biyolojik ve güvenli formül</li>
-                        <li><i class="fas fa-check"></i> Eserlere yapışmaz</li>
-                        <li><i class="fas fa-check"></i> Yüksek nem tutma kapasitesi</li>
-                        <li><i class="fas fa-check"></i> Sıcaklık stabilizasyonu</li>
-                    </ul>
-                </div>
-                
-                <!-- Card 2 -->
-                <div class="solution-card">
-                    <div class="card-icon">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <h3>2. Sensör Sistemi</h3>
-                    <p>Arduino tabanlı sensörler ile koruma etkinliği gerçek zamanlı olarak ölçülür ve grafiklenir.</p>
-                    <ul class="card-features">
-                        <li><i class="fas fa-check"></i> DHT22 nem/sıcaklık sensörü</li>
-                        <li><i class="fas fa-check"></i> Gerçek zamanlı veri izleme</li>
-                        <li><i class="fas fa-check"></i> Bilimsel kanıt sağlama</li>
-                        <li><i class="fas fa-check"></i> Karşılaştırmalı analiz</li>
-                    </ul>
-                </div>
-                
-                <!-- Card 3 -->
-                <div class="solution-card">
-                    <div class="card-icon">
-                        <i class="fas fa-qrcode"></i>
-                    </div>
-                    <h3>3. Dijital Arşiv</h3>
-                    <p>Her eser için QR kod ile erişilen dijital kayıt sistemi. Tüm veriler güvende ve erişilebilir.</p>
-                    <ul class="card-features">
-                        <li><i class="fas fa-check"></i> Benzersiz QR kod sistemi</li>
-                        <li><i class="fas fa-check"></i> Merkezi dijital arşiv</li>
-                        <li><i class="fas fa-check"></i> Kalıcı ve güvenli kayıt</li>
-                        <li><i class="fas fa-check"></i> Kolay erişim ve paylaşım</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section id="how-it-works" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">Nasıl <span class="highlight">Çalışır?</span></h2>
-            <p class="section-subtitle">BioGel X sisteminin 5 adımda çalışma süreci</p>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-number">1</div>
-                    <div class="timeline-content">
-                        <h3>Eser Kazılıyor</h3>
-                        <p>Arkeolog hassas bir eseri topraktan çıkarır. Eser ortam değişikliğine maruz kalır ve hızla bozulma riski altındadır.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-number">2</div>
-                    <div class="timeline-content">
-                        <h3>BioGel Uygulanıyor</h3>
-                        <p>Eserin üzerine BioGel jeli püskürtülür veya sürülür. Jel, eser etrafında koruyucu bir mikro-iklim tabakası oluşturur.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-number">3</div>
-                    <div class="timeline-content">
-                        <h3>Sensör Takılıyor</h3>
-                        <p>Arduino tabanlı sensör modülü yerleştirilir. Nem ve sıcaklık verileri gerçek zamanlı olarak kaydedilmeye başlanır.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-number">4</div>
-                    <div class="timeline-content">
-                        <h3>QR Kod Oluşturuluyor</h3>
-                        <p>Eser için benzersiz bir QR kod oluşturulur ve eserin yanına yerleştirilir. Bu kod dijital arşive bağlantı sağlar.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-number">5</div>
-                    <div class="timeline-content">
-                        <h3>Veriler Kaydediliyor</h3>
-                        <p>Tüm veriler (fotoğraflar, sensör okumaları, arkeolog notları) merkezi dijital arşive aktarılır ve kalıcı olarak saklanır.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sensor Data Section -->
-    <section id="sensor-data" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">Canlı <span class="highlight">Sensör Verileri</span></h2>
-            <p class="section-subtitle">BioGel'in etkinliğini gerçek zamanlı verilerle görün. 24 saatlik laboratuvar test sonuçları.</p>
-            
-            <div class="demo-controls">
-                <button class="control-btn active" data-chart="humidity">Nem Karşılaştırması</button>
-                <button class="control-btn" data-chart="temperature">Sıcaklık Karşılaştırması</button>
-                <button class="control-btn" data-chart="stability">Stabilite Analizi</button>
-            </div>
-            
-            <div class="chart-container">
-                <canvas id="sensorChart"></canvas>
-            </div>
-            
-            <div class="chart-legends">
-                <div class="legend">
-                    <span class="legend-color" style="background-color: #00acc1;"></span>
-                    <span class="legend-text">BioGel Uygulanmış Örnek</span>
-                </div>
-                <div class="legend">
-                    <span class="legend-color" style="background-color: #ff4081;"></span>
-                    <span class="legend-text">Kontrol Örneği (Jelsiz)</span>
-                </div>
-            </div>
-            
-            <div class="sensor-stats">
-                <div class="stat-card">
-                    <h4>Nem Stabilitesi</h4>
-                    <div class="stat-value">%94</div>
-                    <div class="stat-bar">
-                        <div class="stat-progress" style="width: 94%;"></div>
-                    </div>
-                    <p>BioGel nemi 24 saat korur</p>
-                </div>
-                
-                <div class="stat-card">
-                    <h4>Sıcaklık Kontrolü</h4>
-                    <div class="stat-value">%88</div>
-                    <div class="stat-bar">
-                        <div class="stat-progress" style="width: 88%;"></div>
-                    </div>
-                    <p>Isı değişimlerini azaltır</p>
-                </div>
-                
-                <div class="stat-card">
-                    <h4>Koruma Süresi</h4>
-                    <div class="stat-value">24+</div>
-                    <div class="stat-bar">
-                        <div class="stat-progress" style="width: 100%;"></div>
-                    </div>
-                    <p>Saatlerce etkili koruma</p>
-                </div>
-                
-                <div class="stat-card">
-                    <h4>Eser Güvenliği</h4>
-                    <div class="stat-value">%100</div>
-                    <div class="stat-bar">
-                        <div class="stat-progress" style="width: 100%;"></div>
-                    </div>
-                    <p>Hiçbir yan etki yok</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- QR System Section -->
-    <section id="qr-system" class="fade-in">
-        <div class="container">
-            <div class="qr-demo">
-                <div class="qr-content">
-                    <h2 class="section-title">QR Kod ile <span class="highlight">Dijital Arşivleme</span></h2>
-                    <p>Her BioGel uygulaması için oluşturulan benzersiz QR kod, eserin tüm bilgilerine anında erişim sağlar. Modern arkeoloji için vazgeçilmez bir kayıt sistemi.</p>
-                    
-                    <div class="qr-features">
-                        <div class="qr-feature">
-                            <i class="fas fa-camera"></i>
-                            <h4>Fotoğraf Arşivi</h4>
-                            <p>Eserin önce/sonra ve detay fotoğrafları</p>
-                        </div>
-                        
-                        <div class="qr-feature">
-                            <i class="fas fa-chart-line"></i>
-                            <h4>Sensör Verileri</h4>
-                            <p>Gerçek zamanlı nem ve sıcaklık grafikleri</p>
-                        </div>
-                        
-                        <div class="qr-feature">
-                            <i class="fas fa-file-alt"></i>
-                            <h4>Detaylı Rapor</h4>
-                            <p>Uygulama notları ve bilimsel test sonuçları</p>
-                        </div>
-                        
-                        <div class="qr-feature">
-                            <i class="fas fa-database"></i>
-                            <h4>Merkezi Arşiv</h4>
-                            <p>Bulut tabanlı güvenli veri saklama</p>
-                        </div>
-                    </div>
-                    
-                    <a href="#contact" class="btn-primary">
-                        <i class="fas fa-download"></i> Demo QR Kod İndir
+                    <a href="#features" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Özellikleri Keşfet
+                    </a>
+                    <a href="#data" class="btn btn-secondary">
+                        <i class="fas fa-chart-line"></i> Verileri İncele
                     </a>
                 </div>
                 
-                <div class="qr-code-container">
-                    <div class="qr-code">
-                        <div class="qr-visual">
-                            <div class="qr-pattern"></div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">72</span>
+                        <span class="stat-label">Saat Koruma</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">%99</span>
+                        <span class="stat-label">Nem Stabilitesi</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="kit-illustration">
+                    <div class="kit-diagram">
+                        <div class="kit-outline">
+                            <div class="artifact"></div>
+                            <div class="jel-layer"></div>
+                            <div class="sensor-indicator" style="top: 20%; left: 20%;"></div>
+                            <div class="sensor-indicator" style="top: 60%; right: 20%;"></div>
+                            <div class="sensor-indicator" style="bottom: 20%; left: 50%;"></div>
                         </div>
-                        <div class="qr-info">
-                            <h4>Örnek Eser Kaydı</h4>
-                            <p>Ahşap Heykel - 15. Yüzyıl</p>
-                            <p class="qr-link">https://biogelx.com/artifact/AH-2023-001</p>
-                            <p><small>Bu QR kodu tarayarak eser detaylarına ulaşın</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Üç Parçalı <span class="highlight">Bütünsel Çözüm</span></h2>
+            <p class="section-subtitle fade-in">
+                ArchaKit, koruma kutusu, agar agar jel tabakası ve sensör ağı ile eserleriniz için kapsamlı koruma sağlar
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3>Koruyucu Kutu</h3>
+                    <p>Şok emici, hava geçirmez tasarım ile eserlerin güvenli taşınması</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Düşme testi sertifikalı</li>
+                        <li><i class="fas fa-check"></i> Su geçirmez yapı</li>
+                        <li><i class="fas fa-check"></i> Modüler boyut seçenekleri</li>
+                        <li><i class="fas fa-check"></i> Hafif ve dayanıklı malzeme</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                    </div>
+                    <h3>Agar Agar Jeli</h3>
+                    <p>Doğal jel tabakası ile mikro-iklim oluşturma</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> 72 saat nem stabilizasyonu</li>
+                        <li><i class="fas fa-check"></i> Eserlere yapışmaz formül</li>
+                        <li><i class="fas fa-check"></i> Biyolojik olarak çözünür</li>
+                        <li><i class="fas fa-check"></i> Sıcaklık tamponu görevi</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>Sensör Sistemi</h3>
+                    <p>Anlık veri takibi ile 7/24 izleme imkanı</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> DHT22 nem/sıcaklık sensörü</li>
+                        <li><i class="fas fa-check"></i> Gerçek zamanlı veri akışı</li>
+                        <li><i class="fas fa-check"></i> Web ve mobil erişim</li>
+                        <li><i class="fas fa-check"></i> Uzaktan takip imkanı</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology">
+        <div class="container">
+            <h2 class="section-title fade-in">Bilimsel <span class="highlight">Teknoloji</span></h2>
+            <p class="section-subtitle fade-in">
+                ArchaKit, bilimsel araştırmalar ve testler sonucunda geliştirilmiş bir koruma teknolojisidir
+            </p>
+            
+            <div class="tech-demonstration">
+                <div class="tech-content fade-in">
+                    <h3>Teknik Özellikler ve Spesifikasyonlar</h3>
+                    <p>
+                        ArchaKit, arkeologların sahada karşılaştığı en kritik sorunlardan biri olan 
+                        "eserlerin kazı anından laboratuvara ulaşana kadar geçen süredeki korunması" 
+                        problemini çözmek üzere tasarlandı.
+                    </p>
+                    <p>
+                        Sistem, FLL (First Lego League) 2025-2026 sezonu kapsamında Light Side Pro takımı 
+                        tarafından geliştirilmiş ve laboratuvar testlerinden geçirilmiştir.
+                    </p>
+                    
+                    <div class="tech-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">Koruma Süresi</span>
+                            <span class="spec-value">72 Saat</span>
                         </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Nem Stabilitesi</span>
+                            <span class="spec-value">%94 ±2</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Sıcaklık Aralığı</span>
+                            <span class="spec-value">15°C - 25°C</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Sensör Ölçüm Aralığı</span>
+                            <span class="spec-value">Her 10 dakika</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Kutu Boyutları</span>
+                            <span class="spec-value">3 Farklı Boyut</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-visual fade-in">
+                    <div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 4rem; color: var(--accent); margin-bottom: 20px;">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">Bilimsel Test Sonuçları</h3>
+                        <p style="color: var(--gray);">
+                            Laboratuvar testleri ile doğrulanmış etkinlik
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Section -->
+    <section id="data">
+        <div class="container">
+            <h2 class="section-title fade-in">Bilimsel <span class="highlight">Veri ve Analiz</span></h2>
+            <p class="section-subtitle fade-in">
+                ArchaKit'in performansını 24 saatlik laboratuvar test verileri ile görün
+            </p>
+            
+            <div class="data-container">
+                <div class="chart-container fade-in">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                
+                <div class="data-legend fade-in">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: var(--accent);"></div>
+                        <span class="legend-text">ArchaKit ile Korunan</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: var(--gray);"></div>
+                        <span class="legend-text">Kontrol Grubu (Korumasız)</span>
+                    </div>
+                </div>
+                
+                <div class="data-points fade-in">
+                    <div class="data-point">
+                        <span class="data-value">%94</span>
+                        <span class="data-label">Nem Stabilitesi</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-value">%88</span>
+                        <span class="data-label">Sıcaklık Kontrolü</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-value">72</span>
+                        <span class="data-label">Saat Koruma</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-value">%100</span>
+                        <span class="data-label">Eser Güvenliği</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section id="workflow">
+        <div class="container">
+            <h2 class="section-title fade-in">Basit ve <span class="highlight">Etkili Süreç</span></h2>
+            <p class="section-subtitle fade-in">
+                ArchaKit ile eser koruması 5 basit adımda tamamlanır
+            </p>
+            
+            <div class="workflow-steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Eser Keşfi</h3>
+                        <p>Arkeolog eseri kazı alanında keşfeder ve yerinden çıkarır. Kritik koruma süreci başlar.</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>ArchaKit Hazırlığı</h3>
+                        <p>Koruma kutusuna agar agar jeli yerleştirilir ve sensörler aktif hale getirilir.</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Eser Yerleştirme</h3>
+                        <p>Eser özenle ArchaKit'in içine yerleştirilir. Jel tabakası eseri tamamen çevreler.</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Sistem Aktivasyonu</h3>
+                        <p>Kutu kapatılır, sensörler veri göndermeye başlar. Koruma süreci aktif hale gelir.</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Takip ve İzleme</h3>
+                        <p>Web arayüzü üzerinden eserin nem ve sıcaklık verileri 7/24 izlenebilir.</p>
                     </div>
                 </div>
             </div>
@@ -1567,148 +1436,137 @@
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="fade-in">
+    <section id="team">
         <div class="container">
-            <h2 class="section-title">Proje <span class="highlight">Ekibimiz</span></h2>
-            <p class="section-subtitle">BioGel X projesini geliştiren  Light Side Pro FLL (First Lego League) takımı üyeleri</p>
+            <h2 class="section-title fade-in">Light Side Pro <span class="highlight">Takımı</span></h2>
             
-            <div class="team-members">
-                <div class="team-card">
-                    <div class="team-avatar">
+            <div class="team-intro fade-in">
+                <p>
+                    ArchaKit projesi, FMV Nişantaşı Işık Lisesi öğrencilerinden oluşan Light Side Pro takımı 
+                    tarafından FLL (First Lego League) 2025-2026 sezonu kapsamında geliştirilmiştir. 
+                    Takımımız bilim, teknoloji, mühendislik ve matematik alanlarında disiplinlerarası çalışarak 
+                    bu inovasyonu hayata geçirmiştir.
+                </p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member fade-in">
+                    <div class="member-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="member-name">Proje Lideri</div>
+                    <div class="member-role">Liderlik & Koordinasyon</div>
+                    <p class="member-desc">
+                        Proje vizyonunu belirleyen, takım koordinasyonunu sağlayan ve FLL sürecini yöneten lider.
+                    </p>
+                    <div class="member-tags">
+                        <span class="member-tag">Liderlik</span>
+                        <span class="member-tag">Strateji</span>
+                    </div>
+                </div>
+                
+                <div class="team-member fade-in">
+                    <div class="member-icon">
                         <i class="fas fa-flask"></i>
                     </div>
-                    <h3>Elizya</h3>
-                    <div class="team-role">Proje Kaptanı</div>
-                    <p class="team-desc">BioGel formülasyonunun geliştirilmesi ve laboratuvar testlerinden sorumlu.</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Biyoloji</span>
-                        <span class="skill-tag">Kimya</span>
-                        <span class="skill-tag">Araştırma</span>
+                    <div class="member-name">Bilim Ekibi</div>
+                    <div class="member-role">Araştırma & Geliştirme</div>
+                    <p class="member-desc">
+                        Agar agar jel formülasyonu, bilimsel testler ve laboratuvar çalışmalarından sorumlu ekip.
+                    </p>
+                    <div class="member-tags">
+                        <span class="member-tag">Biyoloji</span>
+                        <span class="member-tag">Kimya</span>
                     </div>
                 </div>
-             
-                <div class="team-card">
-                    <div class="team-avatar">
+                
+                <div class="team-member fade-in">
+                    <div class="member-icon">
                         <i class="fas fa-code"></i>
                     </div>
-                    <h3>Doruk</h3>
-                    <div class="team-role">Light Side Pro FLL Kaptanı</div>
-                    <p class="team-desc">FLL Yarışması için robotu geliştirdi.</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Liderlik</span>
-                        <span class="skill-tag">Robot Geliştirme</span>
-                        <span class="skill-tag">Proje Yönetimi</span>
+                    <div class="member-name">Teknoloji Ekibi</div>
+                    <div class="member-role">Yazılım & Donanım</div>
+                    <p class="member-desc">
+                        Sensör sistemleri, veri platformu ve web arayüzünün geliştirilmesinden sorumlu ekip.
+                    </p>
+                    <div class="member-tags">
+                        <span class="member-tag">Arduino</span>
+                        <span class="member-tag">Web Geliştirme</span>
                     </div>
                 </div>
-                        <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-code"></i>
+                
+                <div class="team-member fade-in">
+                    <div class="member-icon">
+                        <i class="fas fa-robot"></i>
                     </div>
-                    <h3>Kutlu</h3>
-                    <div class="team-role">Yazılım & Donanım Geliştirici</div>
-                    <p class="team-desc">Arduino sensör sistemi, web sitesi ve dijital arşiv altyapısını geliştirdi.</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Arduino</span>
-                        <span class="skill-tag">Web Geliştirme</span>
-                        <span class="skill-tag">Veri Analizi</span>
+                    <div class="member-name">Robotik Ekibi</div>
+                    <div class="member-role">FLL Robot Tasarımı</div>
+                    <p class="member-desc">
+                        FLL robotunun mekanik tasarımı, programlanması ve yarışma performansından sorumlu ekip.
+                    </p>
+                    <div class="member-tags">
+                        <span class="member-tag">Robotik</span>
+                        <span class="member-tag">Programlama</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLL Section -->
+    <section id="fll">
+        <div class="container">
+            <div class="fll-content">
+                <div class="fll-info fade-in">
+                    <div class="fll-badge">
+                        <i class="fas fa-trophy"></i>
+                        FLL 2025-2026
+                    </div>
+                    <h3>First Lego League İnovasyon Projesi</h3>
+                    <p>
+                        ArchaKit, FLL'nin "İnovasyon Projesi" kategorisi için geliştirilmiş bir çözümdür. 
+                        Takımımız, FLL Core Values'ı (Temel Değerleri) benimseyerek bu projeyi hayata geçirmiştir.
+                    </p>
                     
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Uras</h3>
-                    <div class="team-role">Robot Geliştirici</div>
-                    <p class="team-desc">FLL Robotunu Yaptı</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Yazılım</span>
-                        <span class="skill-tag">Robotik</span>
-                        <span class="skill-tag">Lego</span>
-                    </div>
-                </div>
-
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Yer Tutucu</h3>
-                    <div class="team-role">Yer Tutucu</div>
-                    <p class="team-desc">Yer Tutucu</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
+                    <div class="core-values">
+                        <div class="value-item">
+                            <h4>Takım Çalışması</h4>
+                            <p>Birlikte daha iyisini başarırız ve birbirimizin başarısını kutlarız.</p>
+                        </div>
+                        <div class="value-item">
+                            <h4>Yenilikçi Düşünce</h4>
+                            <p>Yaratıcı çözümler geliştirir ve sorunlara farklı açılardan bakarız.</p>
+                        </div>
+                        <div class="value-item">
+                            <h4>Öz Güven</h4>
+                            <p>Yeteneklerimize güvenir ve yeni beceriler öğrenmeye açığız.</p>
+                        </div>
+                        <div class="value-item">
+                            <h4>Sosyal Sorumluluk</h4>
+                            <p>Geliştirdiğimiz çözümlerin topluma fayda sağlamasını hedefleriz.</p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Yer Tutucu</h3>
-                    <div class="team-role">Yer Tutucu</div>
-                    <p class="team-desc">Yer Tutucu</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                    </div>
-                </div>
-
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Yer Tutucu</h3>
-                    <div class="team-role">Yer Tutucu</div>
-                    <p class="team-desc">Yer Tutucu</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                    </div>
-                </div>
-
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Yer Tutucu</h3>
-                    <div class="team-role">Yer Tutucu</div>
-                    <p class="team-desc">Yer Tutucu</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                    </div>
-                </div>
-
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Yer Tutucu</h3>
-                    <div class="team-role">Yer Tutucu</div>
-                    <p class="team-desc">Yer Tutucu</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                    </div>
-                </div>
-
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Yer Tutucu</h3>
-                    <div class="team-role">Yer Tutucu</div>
-                    <p class="team-desc">Yer Tutucu</p>
-                    <div class="team-skills">
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
-                        <span class="skill-tag">Yer Tutucu</span>
+                
+                <div class="fll-visual fade-in">
+                    <div style="background: var(--light); padding: 40px; border-radius: 12px; text-align: center; height: 100%;">
+                        <div style="font-size: 4rem; color: var(--accent); margin-bottom: 30px;">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <h3 style="color: var(--primary); margin-bottom: 20px;">FMV Işık Okulları</h3>
+                        <p style="color: var(--gray); margin-bottom: 30px; line-height: 1.6;">
+                            FMV Nişantaşı Işık Lisesi öğrencileri olarak, bilim ve teknolojiyi kullanarak 
+                            toplumsal sorunlara çözüm üretmeyi hedefliyoruz.
+                        </p>
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 40px;">
+                            <div style="width: 60px; height: 60px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 600; color: var(--primary);">Light Side Pro</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">FLL Takımı</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1716,52 +1574,56 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="fade-in">
+    <section id="contact">
         <div class="container">
-            <h2 class="section-title">Bizimle <span class="highlight">İletişime Geçin</span></h2>
-            <p class="section-subtitle">BioGel X projesi hakkında daha fazla bilgi almak veya işbirliği önerileriniz için bize ulaşın.</p>
+            <h2 class="section-title fade-in">Demo Talep ve <span class="highlight">İletişim</span></h2>
+            <p class="section-subtitle fade-in">
+                ArchaKit hakkında daha fazla bilgi almak veya demo talep etmek için bizimle iletişime geçin
+            </p>
             
             <div class="contact-container">
-                <div class="contact-info">
-                    <h2>İletişim Bilgileri</h2>
-                    <p>BioGel X projesi, FLL (First Lego League) yarışması kapsamında Light Side Pro takımı tarafından geliştirilmiş bir inovasyon projesidir. Arkeolojik mirasın korunmasına yönelik çözümümüz hakkında detaylı bilgi almak isterseniz, aşağıdaki iletişim kanallarından bize ulaşabilirsiniz.</p>
+                <div class="contact-info fade-in">
+                    <h3>Bize Ulaşın</h3>
+                    <p>
+                        ArchaKit projesi hakkında detaylı bilgi, teknik spesifikasyonlar veya 
+                        FLL süreci ile ilgili sorularınız için aşağıdaki iletişim kanallarını kullanabilirsiniz.
+                    </p>
                     
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h4>E-posta</h4>
-                                <p>biogelx@lightsidepro.com</p>
-                            </div>
-                        </div>
-                        
+                    <div class="contact-items">
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div class="contact-text">
+                            <div class="contact-details">
                                 <h4>Konum</h4>
-                                <p>Teşvikiye Caddesi, No:6 İstanbul, Türkiye</p>
-                                <p>FMV Nişantaşı Işık Lisesi</p>
+                                <p>FMV Nişantaşı Işık Lisesi<br>Teşvikiye, İstanbul</p>
                             </div>
                         </div>
                         
                         <div class="contact-item">
                             <div class="contact-icon">
-                                <i class="fas fa-graduation-cap"></i>
+                                <i class="fas fa-envelope"></i>
                             </div>
-                            <div class="contact-text">
-                                <h4>FLL Yarışması</h4>
-                                <p>2025-2026 Sezonu</p>
+                            <div class="contact-details">
+                                <h4>E-posta</h4>
+                                <p>info@archakit.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Takım</h4>
+                                <p>Light Side Pro - FLL Takımı</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="contact-form">
-                    <h3>Mesaj Gönderin</h3>
+                <div class="contact-form-container fade-in">
+                    <h3 style="margin-bottom: 30px;">Demo Talep Formu</h3>
                     <form id="contactForm">
                         <div class="form-group">
                             <label for="name">Adınız Soyadınız</label>
@@ -1774,16 +1636,18 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="subject">Konu</label>
-                            <input type="text" id="subject" required>
+                            <label for="institution">Kurum / Okul</label>
+                            <input type="text" id="institution" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="message">Mesajınız</label>
-                            <textarea id="message" required></textarea>
+                            <textarea id="message" placeholder="ArchaKit hakkında bilgi almak istiyorum..." required></textarea>
                         </div>
                         
-                        <button type="submit" class="btn-primary">Mesajı Gönder</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Mesajı Gönder
+                        </button>
                     </form>
                 </div>
             </div>
@@ -1794,53 +1658,77 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <div class="logo">
-                        <i class="fas fa-prescription-bottle-alt"></i>
-                        <span class="logo-text">BioGel <strong>X</strong></span>
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="fas fa-archway"></i>
+                        Archa<span>Kit</span>
                     </div>
-                    <p>Arkeolojik mirası korumak için yenilikçi teknoloji çözümleri geliştiriyoruz.</p>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/lightsidepro?igsh=MWh4NHJxaGkwOW8zMg=="><i class="fab fa-instagram"></i></a>
+                    <p>
+                        ArchaKit, arkeolojik eserlerin korunması ve taşınması için geliştirilmiş 
+                        yenilikçi bir teknoloji çözümüdür. FLL 2025-2026 sezonu kapsamında 
+                        Light Side Pro takımı tarafından geliştirilmiştir.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/lightsidepro" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
                 </div>
                 
-                <div class="footer-section">
+                <div class="footer-links">
                     <h4>Hızlı Bağlantılar</h4>
                     <ul>
                         <li><a href="#hero">Ana Sayfa</a></li>
-                        <li><a href="#solution">Çözümümüz</a></li>
-                        <li><a href="#how-it-works">Nasıl Çalışır</a></li>
-                        <li><a href="#sensor-data">Sensör Verileri</a></li>
+                        <li><a href="#features">Özellikler</a></li>
+                        <li><a href="#technology">Teknoloji</a></li>
+                        <li><a href="#data">Veriler</a></li>
+                        <li><a href="#team">Ekip</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-section">
+                <div class="footer-links">
                     <h4>Kaynaklar</h4>
                     <ul>
-                        <li><a href="#">FLL Proje Dokümanı</a></li>
-                        <li><a href="#">Bilimsel Test Sonuçları</a></li>
-                        <li><a href="#">BioGel Formül Detayları</a></li>
+                        <li><a href="#">Teknik Dokümantasyon</a></li>
+                        <li><a href="#">Bilimsel Test Raporu</a></li>
+                        <li><a href="#">FLL Proje Sunumu</a></li>
                         <li><a href="#">Arduino Kodları</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-section">
+                <div class="footer-links">
                     <h4>İletişim</h4>
-                    <p><i class="fas fa-envelope"></i> info@biogelx.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Teşvikiye Caddesi, No:6, İstanbul, Türkiye</p>
-                    <p><i class="fas fa-users"></i> Light Side Peo</p>
+                    <ul>
+                        <li><a href="mailto:info@archakit.com">info@archakit.com</a></li>
+                        <li><a href="#">FMV Işık Okulları</a></li>
+                        <li><a href="#">Light Side Pro Takımı</a></li>
+                        <li><a href="#">FLL Yarışması</a></li>
+                    </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 BioGel X - Tüm hakları saklıdır. <span class="fll-badge">FLL PROJESİ</span></p>
-                <p class="footer-note">Light Side Pro'dan, Tüm <i class="fas fa-heart"></i> ile kürtüler mirasımızı korumak amacıyla... | First Lego League 2025-2026</p>
+                <p>&copy; 2025 ArchaKit. Tüm hakları saklıdır. 
+                    <span class="fll-tag">
+                        <i class="fas fa-robot"></i> FLL 2025-2026 Projesi
+                    </span>
+                </p>
+                <p style="margin-top: 15px;">
+                    Light Side Pro Takımı | FMV Nişantaşı Işık Lisesi | İstanbul, Türkiye
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
         // Navigation Toggle
         const hamburger = document.getElementById('hamburger');
@@ -1859,7 +1747,7 @@
             });
         });
 
-        // Active link highlighting
+        // Active Navigation
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-menu a');
 
@@ -1870,7 +1758,7 @@
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
                 
-                if (scrollY >= (sectionTop - 200)) {
+                if (window.scrollY >= (sectionTop - 100)) {
                     current = section.getAttribute('id');
                 }
             });
@@ -1881,86 +1769,60 @@
                     link.classList.add('active');
                 }
             });
+            
+            // Navbar shadow on scroll
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
+            }
         });
 
         // Chart.js Implementation
-        const ctx = document.getElementById('sensorChart').getContext('2d');
+        const ctx = document.getElementById('performanceChart').getContext('2d');
         
-        // Data for humidity chart
-        const humidityData = {
-            labels: ['0', '2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24'],
-            datasets: [
-                {
-                    label: 'BioGel Uygulanmış',
-                    data: [85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73],
-                    borderColor: '#00acc1',
-                    backgroundColor: 'rgba(0, 172, 193, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: 'Kontrol Örneği',
-                    data: [85, 75, 65, 55, 45, 40, 35, 30, 28, 26, 24, 22, 20],
-                    borderColor: '#ff4081',
-                    backgroundColor: 'rgba(255, 64, 129, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }
-            ]
-        };
+        // Generate time labels for 24 hours
+        const timeLabels = [];
+        for (let i = 0; i < 24; i++) {
+            timeLabels.push(`${i}:00`);
+        }
 
-        // Data for temperature chart
-        const temperatureData = {
-            labels: ['0', '2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24'],
-            datasets: [
-                {
-                    label: 'BioGel Uygulanmış',
-                    data: [22, 22.1, 22, 21.9, 21.8, 21.9, 22, 22.1, 22, 21.9, 21.8, 21.9, 22],
-                    borderColor: '#00acc1',
-                    backgroundColor: 'rgba(0, 172, 193, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: 'Kontrol Örneği',
-                    data: [22, 23, 24, 25, 26, 27, 28, 27, 26, 25, 24, 23, 22],
-                    borderColor: '#ff4081',
-                    backgroundColor: 'rgba(255, 64, 129, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }
-            ]
-        };
-
-        // Data for stability chart
-        const stabilityData = {
-            labels: ['Nem Stabilitesi', 'Sıcaklık Kontrolü', 'Fiziksel Bütünlük', 'Kimyasal Stabilite'],
-            datasets: [
-                {
-                    label: 'BioGel Uygulanmış',
-                    data: [94, 88, 96, 92],
-                    backgroundColor: 'rgba(0, 172, 193, 0.7)',
-                    borderColor: '#00acc1',
-                    borderWidth: 2
-                },
-                {
-                    label: 'Kontrol Örneği',
-                    data: [25, 45, 30, 35],
-                    backgroundColor: 'rgba(255, 64, 129, 0.7)',
-                    borderColor: '#ff4081',
-                    borderWidth: 2
-                }
-            ]
-        };
-
-        // Chart configuration
-        const chartConfig = {
+        // Data for ArchaKit vs Control
+        const performanceChart = new Chart(ctx, {
             type: 'line',
-            data: humidityData,
+            data: {
+                labels: timeLabels,
+                datasets: [{
+                    label: 'ArchaKit ile Korunan',
+                    data: Array.from({length: 24}, (_, i) => {
+                        const base = 85;
+                        const variation = Math.sin(i / 4) * 2;
+                        return base + variation;
+                    }),
+                    borderColor: '#1abc9c',
+                    backgroundColor: 'rgba(26, 188, 156, 0.05)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 6
+                }, {
+                    label: 'Kontrol Grubu (Korumasız)',
+                    data: Array.from({length: 24}, (_, i) => {
+                        const base = 85 - (i * 2.5);
+                        const variation = Math.random() * 5;
+                        return Math.max(30, base + variation);
+                    }),
+                    borderColor: '#7f8c8d',
+                    backgroundColor: 'rgba(127, 140, 141, 0.05)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderDash: [5, 5]
+                }]
+            },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -1970,98 +1832,84 @@
                         labels: {
                             font: {
                                 size: 14,
-                                family: "'Poppins', sans-serif"
+                                family: "'Inter', sans-serif"
                             },
-                            padding: 20
+                            padding: 20,
+                            usePointStyle: true
                         }
                     },
-                    title: {
-                        display: true,
-                        text: '24 Saatlik Nem Karşılaştırması (%)',
-                        font: {
-                            size: 18,
-                            family: "'Poppins', sans-serif"
-                        },
-                        padding: {
-                            top: 10,
-                            bottom: 30
-                        }
+                    tooltip: {
+                        backgroundColor: 'rgba(44, 62, 80, 0.9)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: '#1abc9c',
+                        borderWidth: 1,
+                        cornerRadius: 6
                     }
                 },
                 scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Inter', sans-serif",
+                                size: 12
+                            },
+                            color: '#7f8c8d'
+                        }
+                    },
                     y: {
-                        beginAtZero: false,
-                        min: 0,
+                        min: 30,
                         max: 100,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Inter', sans-serif",
+                                size: 12
+                            },
+                            color: '#7f8c8d',
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        },
                         title: {
                             display: true,
                             text: 'Nem Oranı (%)',
                             font: {
+                                family: "'Inter', sans-serif",
                                 size: 14,
-                                family: "'Roboto', sans-serif"
-                            }
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Saat',
-                            font: {
-                                size: 14,
-                                family: "'Roboto', sans-serif"
-                            }
+                                weight: '500'
+                            },
+                            color: '#2c3e50'
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
-        };
-
-        // Create chart
-        const sensorChart = new Chart(ctx, chartConfig);
-
-        // Chart switching
-        const controlBtns = document.querySelectorAll('.control-btn');
-        
-        controlBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                controlBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
-                btn.classList.add('active');
-                
-                // Change chart based on button data
-                const chartType = btn.getAttribute('data-chart');
-                
-                switch(chartType) {
-                    case 'humidity':
-                        sensorChart.data = humidityData;
-                        sensorChart.options.plugins.title.text = '24 Saatlik Nem Karşılaştırması (%)';
-                        sensorChart.options.scales.y.title.text = 'Nem Oranı (%)';
-                        sensorChart.options.scales.y.min = 0;
-                        sensorChart.options.scales.y.max = 100;
-                        sensorChart.config.type = 'line';
-                        break;
-                    case 'temperature':
-                        sensorChart.data = temperatureData;
-                        sensorChart.options.plugins.title.text = '24 Saatlik Sıcaklık Karşılaştırması (°C)';
-                        sensorChart.options.scales.y.title.text = 'Sıcaklık (°C)';
-                        sensorChart.options.scales.y.min = 20;
-                        sensorChart.options.scales.y.max = 30;
-                        sensorChart.config.type = 'line';
-                        break;
-                    case 'stability':
-                        sensorChart.data = stabilityData;
-                        sensorChart.options.plugins.title.text = 'Koruma Performans Karşılaştırması (%)';
-                        sensorChart.options.scales.y.title.text = 'Performans (%)';
-                        sensorChart.options.scales.y.min = 0;
-                        sensorChart.options.scales.y.max = 100;
-                        sensorChart.config.type = 'bar';
-                        break;
-                }
-                
-                sensorChart.update();
-            });
         });
+
+        // Update chart with new data every 10 seconds (simulated live data)
+        setInterval(() => {
+            const newArchakitData = Math.random() * 2 + 83;
+            const newControlData = performanceChart.data.datasets[1].data[23] - 0.5;
+            
+            performanceChart.data.datasets[0].data.push(newArchakitData);
+            performanceChart.data.datasets[1].data.push(Math.max(30, newControlData));
+            
+            performanceChart.data.datasets[0].data.shift();
+            performanceChart.data.datasets[1].data.shift();
+            
+            performanceChart.update('none');
+        }, 10000);
 
         // Fade-in animation on scroll
         const fadeElements = document.querySelectorAll('.fade-in');
@@ -2078,22 +1926,42 @@
         };
         
         window.addEventListener('scroll', fadeInOnScroll);
-        // Initial check
-        fadeInOnScroll();
+        window.addEventListener('load', fadeInOnScroll);
 
-        // Contact form submission
+        // Form Submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             
-            // Show success message
-            alert(`Teşekkürler ${name}! Mesajınız başarıyla gönderildi. Size ${email} adresinden dönüş yapacağız.`);
+            // Get button and save original text
+            const submitBtn = this.querySelector('button');
+            const originalHTML = submitBtn.innerHTML;
             
-            // Reset form
-            this.reset();
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Show success state
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Gönderildi!';
+                submitBtn.style.background = '#27ae60';
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalHTML;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+                
+                // Log to console (for demo)
+                console.log('Contact Form Submitted:', { name, email });
+            }, 1500);
         });
 
         // Smooth scrolling for anchor links
@@ -2114,17 +1982,38 @@
             });
         });
 
-        // Initialize with first chart visible
-        window.addEventListener('load', () => {
-            // Trigger fade-in animation on load
-            fadeElements.forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight) {
-                    el.classList.add('visible');
+        // Update data points with random values (simulated)
+        function updateDataPoints() {
+            const dataPoints = document.querySelectorAll('.data-value');
+            
+            dataPoints.forEach(point => {
+                const currentValue = parseInt(point.textContent);
+                if (!isNaN(currentValue)) {
+                    const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+                    const newValue = Math.max(85, Math.min(99, currentValue + change));
+                    if (point.textContent.includes('%')) {
+                        point.textContent = newValue + '%';
+                    } else {
+                        point.textContent = newValue;
+                    }
                 }
             });
+        }
+
+        // Update data points every 8 seconds
+        setInterval(updateDataPoints, 8000);
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            fadeInOnScroll();
             
-            // Set first button as active
-            controlBtns[0].click();
+            // Add smooth transition for page load
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
         });
     </script>
 </body>
