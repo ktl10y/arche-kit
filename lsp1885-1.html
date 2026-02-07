@@ -1,1 +1,496 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSP1885#1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* GENEL STİLLER */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* HEADER */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #1abc9c;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #1abc9c;
+        }
+        
+        .back-btn {
+            background: #1abc9c;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* ZAMAN BİLGİSİ */
+        .time-info {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        /* ANA İÇERİK */
+        .main-content {
+            padding: 30px 0;
+        }
+        
+        .product-header {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .product-code {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .product-image {
+            width: 200px;
+            height: 200px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ddd;
+        }
+        
+        .product-image i {
+            font-size: 60px;
+            color: #ccc;
+        }
+        
+        /* VERİ KARTLARI */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .data-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .data-card h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1abc9c;
+        }
+        
+        .sensor-data {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        
+        .sensor-item {
+            padding: 15px;
+        }
+        
+        .sensor-value {
+            font-size: 42px;
+            font-weight: bold;
+            color: #1abc9c;
+            margin-bottom: 5px;
+        }
+        
+        .sensor-unit {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .sensor-label {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        /* DURUM BİLGİLERİ */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .status-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #1abc9c;
+        }
+        
+        .status-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .status-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        
+        /* FOOTER */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo span {
+            color: #1abc9c;
+        }
+        
+        .footer-links h4 {
+            margin-bottom: 15px;
+            color: #1abc9c;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .product-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .sensor-data {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-archway"></i> Arche<span>Kit</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Ana Sayfa</a>
+                    <a href="#">Ürünler</a>
+                    <a href="#">Veriler</a>
+                    <a href="#">Destek</a>
+                </div>
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+                </a>
+            </div>
+        </div>
+    </header>
 
+    <!-- ZAMAN BİLGİSİ -->
+    <div class="time-info">
+        <div class="container">
+            <span id="current-time"></span> | Son Güncelleme: <span id="last-updated"></span>
+        </div>
+    </div>
+
+    <!-- ANA İÇERİK -->
+    <div class="container main-content">
+        <!-- ÜRÜN BAŞLIK -->
+        <div class="product-header">
+            <div class="product-image">
+                <i class="fas fa-box-open"></i>
+                <!-- Buraya fotoğraf ekleyeceksin -->
+                <<img src="https://raw.githubusercontent.com/ktl10y/arche-kit/refs/heads/main/Untitled%20design%20(1).png" alt="Ürün Fotoğrafı" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+            </div>
+            <div>
+                <h1 class="product-code">LSP1885#1</h1>
+                <p>Arche-Kit Demo Ürünü</p>
+                <p style="color:#666; margin-top:10px;">Koruma Durumu: <strong style="color:#27ae60;">AKTİF</strong></p>
+            </div>
+        </div>
+
+        <!-- SENSÖR VERİLERİ -->
+        <div class="data-grid">
+            <div class="data-card">
+                <h3><i class="fas fa-thermometer-half"></i> Sıcaklık Verileri</h3>
+                <div class="sensor-data">
+                    <div class="sensor-item">
+                        <div class="sensor-value" id="temperature">22.5</div>
+                        <div class="sensor-unit">°C</div>
+                        <div class="sensor-label">Ortam Sıcaklığı</div>
+                    </div>
+                    <div class="sensor-item">
+                        <div class="sensor-value" id="temp-stability">99.7</div>
+                        <div class="sensor-unit">%</div>
+                        <div class="sensor-label">Kararlılık Oranı</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <h3><i class="fas fa-tint"></i> Nem Verileri</h3>
+                <div class="sensor-data">
+                    <div class="sensor-item">
+                        <div class="sensor-value" id="humidity">94.2</div>
+                        <div class="sensor-unit">%</div>
+                        <div class="sensor-label">Ortam Nemi</div>
+                    </div>
+                    <div class="sensor-item">
+                        <div class="sensor-value" id="humidity-stability">98.5</div>
+                        <div class="sensor-unit">%</div>
+                        <div class="sensor-label">Kararlılık Oranı</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DURUM BİLGİLERİ -->
+        <div class="data-card">
+            <h3><i class="fas fa-info-circle"></i> Sistem Durumu</h3>
+            <div class="status-grid">
+                <div class="status-item">
+                    <h4>Ürün Tespiti</h4>
+                    <div class="status-value">2 Ürün Tespit Edildi</div>
+                    <p style="color:#666; font-size:14px; margin-top:5px;">Kutu içinde 2 arkeolojik eser bulunuyor</p>
+                </div>
+                <div class="status-item">
+                    <h4>Sensör Durumu</h4>
+                    <div class="status-value">AKTİF</div>
+                    <p style="color:#666; font-size:14px; margin-top:5px;">Tüm sensörler çalışır durumda</p>
+                </div>
+                <div class="status-item">
+                    <h4>Agar Agar Durumu</h4>
+                    <div class="status-value">TESPİT EDİLDİ</div>
+                    <p style="color:#666; font-size:14px; margin-top:5px;">Bio-gel tabakası aktif</p>
+                </div>
+                <div class="status-item">
+                    <h4>Pil Durumu</h4>
+                    <div class="status-value">87%</div>
+                    <p style="color:#666; font-size:14px; margin-top:5px;">Yeterli pil seviyesi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Arche<span>Kit</span></div>
+                    <p>Arkeolojik eserlerin korunması ve taşınması için geliştirilmiş yenilikçi bir teknoloji çözümü.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Hızlı Bağlantılar</h4>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="#">Ürünler</a></li>
+                        <li><a href="#">Teknoloji</a></li>
+                        <li><a href="#">Veriler</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>İletişim</h4>
+                    <ul>
+                        <li><a href="mailto:info@archekit.com">info@archekit.com</a></li>
+                        <li><a href="#">FMV Işık Okulları</a></li>
+                        <li><a href="#">Light Side Pro Takımı</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Arche-Kit. Tüm hakları saklıdır. | Light Side Pro Takımı</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ZAMAN GÖSTERİMİ
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('tr-TR', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            const dateString = now.toLocaleDateString('tr-TR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            }) + ' ' + timeString;
+            
+            document.getElementById('current-time').textContent = 'Şu an: ' + timeString;
+            document.getElementById('last-updated').textContent = dateString;
+        }
+
+        // VERİLERİ RANDOM GÜNCELLE (Stabil)
+        function updateSensorData() {
+            // Sıcaklık: 22.0 - 23.0 arası
+            const temp = (22 + Math.random()).toFixed(1);
+            document.getElementById('temperature').textContent = temp;
+            
+            // Sıcaklık kararlılığı: 99.5 - 99.9 arası
+            const tempStability = (99.5 + Math.random() * 0.4).toFixed(1);
+            document.getElementById('temp-stability').textContent = tempStability;
+            
+            // Nem: 93.5 - 94.5 arası
+            const humidity = (93.5 + Math.random()).toFixed(1);
+            document.getElementById('humidity').textContent = humidity;
+            
+            // Nem kararlılığı: 98.0 - 99.0 arası
+            const humidityStability = (98 + Math.random()).toFixed(1);
+            document.getElementById('humidity-stability').textContent = humidityStability;
+            
+            // Pil durumunu da güncelle (yavaş azalsın)
+            const batteryElement = document.querySelector('.status-item:nth-child(4) .status-value');
+            let battery = parseFloat(batteryElement.textContent);
+            if (battery > 50) {
+                battery -= 0.1;
+                batteryElement.textContent = battery.toFixed(1) + '%';
+            }
+        }
+
+        // SAYFA YÜKLENİNCE ÇALIŞTIR
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTime();
+            updateSensorData();
+            
+            // Her saniye zamanı güncelle
+            setInterval(updateTime, 1000);
+            
+            // Her 5 saniyede bir verileri güncelle
+            setInterval(updateSensorData, 5000);
+            
+            // Sayfa yenilenince de güncelle
+            window.addEventListener('load', updateTime);
+        });
+
+        // SAYFAYI YENİLE BUTONU (opsiyonel)
+        function refreshData() {
+            updateSensorData();
+            updateTime();
+            
+            // Feedback göster
+            const btn = document.querySelector('.refresh-btn');
+            if (btn) {
+                btn.innerHTML = '<i class="fas fa-sync fa-spin"></i> Yenileniyor...';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-sync"></i> Verileri Yenile';
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
