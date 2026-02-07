@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
+       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LSP1885#1</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/ktl10y/arche-kit/refs/heads/main/ARCHA-KI%CC%87T%20(1).png" type="image/png">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         /* GENEL STİLLER */
         * {
             margin: 0;
@@ -278,25 +283,17 @@
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="index.html" class="logo">
-                    <i class="fas fa-archway"></i> Arche<span>Kit</span>
-                </a>
-                <div class="nav-links">
-                    <a href="index.html">Ana Sayfa</a>
-                    <a href="#">Ürünler</a>
-                    <a href="#">Veriler</a>
-                    <a href="#">Destek</a>
-                </div>
-                <a href="index.html" class="back-btn">
+ <nav id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-text">Arche<span>Kit</span></div>
+            </a>
+             <a href="/arche-kit" class="back-btn">
                     <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
                 </a>
-            </div>
         </div>
-    </header>
+    </nav>
+
 
     <!-- ZAMAN BİLGİSİ -->
     <div class="time-info">
@@ -310,7 +307,6 @@
         <!-- ÜRÜN BAŞLIK -->
         <div class="product-header">
             <div class="product-image">
-                <i class="fas fa-box-open"></i>
                 <!-- Buraya fotoğraf ekleyeceksin -->
                 <<img src="https://raw.githubusercontent.com/ktl10y/arche-kit/refs/heads/main/Untitled%20design%20(1).png" alt="Ürün Fotoğrafı" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
             </div>
@@ -384,39 +380,51 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer>
+     <footer>
         <div class="container">
             <div class="footer-content">
-                <div>
-                    <div class="footer-logo">Arche<span>Kit</span></div>
-                    <p>Arkeolojik eserlerin korunması ve taşınması için geliştirilmiş yenilikçi bir teknoloji çözümü.</p>
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="fas fa-archway"></i>
+                        Arche<span>Kit</span>
+                    </div>
+                    <p>
+                        Arche-Kit, arkeolojik eserlerin korunması ve taşınması için geliştirilmiş 
+                        yenilikçi bir teknoloji çözümüdür. FLL UNEARTHED 2025-2026 sezonu kapsamında 
+                        Light Side Pro takımı tarafından geliştirilmiştir.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/lightsidepro" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <h4>Hızlı Bağlantılar</h4>
-                    <ul>
-                        <li><a href="index.html">Ana Sayfa</a></li>
-                        <li><a href="#">Ürünler</a></li>
-                        <li><a href="#">Teknoloji</a></li>
-                        <li><a href="#">Veriler</a></li>
-                    </ul>
-                </div>
+                   
                 <div class="footer-links">
                     <h4>İletişim</h4>
                     <ul>
-                        <li><a href="mailto:info@archekit.com">info@archekit.com</a></li>
+                        <li><a href="mailto:elizyajanesandikci.n24@fmvisik.k12.tr">Bize Mail Atın!</a></li>
                         <li><a href="#">FMV Işık Okulları</a></li>
                         <li><a href="#">Light Side Pro Takımı</a></li>
+                        <li><a href="#">FLL UNEARTHED 2026</a></li>
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2025 Arche-Kit. Tüm hakları saklıdır. | Light Side Pro Takımı</p>
+                <p>&copy; 2026 Arche-Kit. Tüm hakları saklıdır. 
+                    <span class="fll-tag">
+                        <i class="fas fa-robot"></i> FLL UNEARTHED 2025-2026 Projesi
+                    </span>
+                </p>
+                <p style="margin-top: 15px;">
+                    Light Side Pro Takımı | FMV Nişantaşı Işık Lisesi | Teşvikiye Caddesi, No.6, Şişli, İstanbul, Türkiye
+                </p>
             </div>
         </div>
     </footer>
 
-    <script>
+  <script>
         // ZAMAN GÖSTERİMİ
         function updateTime() {
             const now = new Date();
@@ -445,8 +453,8 @@
             const tempStability = (99.5 + Math.random() * 0.4).toFixed(1);
             document.getElementById('temp-stability').textContent = tempStability;
             
-            // Nem: 93.5 - 94.5 arası
-            const humidity = (93.5 + Math.random()).toFixed(1);
+            // NEM: 28.0 - 30.0 arası (İSTEĞİN GİBİ)
+            const humidity = (28 + Math.random() * 2).toFixed(1);
             document.getElementById('humidity').textContent = humidity;
             
             // Nem kararlılığı: 98.0 - 99.0 arası
