@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-       <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LSP1885#1</title>
     <link rel="icon" href="https://raw.githubusercontent.com/ktl10y/arche-kit/refs/heads/main/ARCHA-KI%CC%87T%20(1).png" type="image/png">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+           <link rel="stylesheet" href="style.css">
+    
+    <style>
         /* GENEL STİLLER */
         * {
             margin: 0;
@@ -32,17 +32,17 @@
             padding: 0 20px;
         }
         
-        /* HEADER */
-        header {
+        /* NAVBAR */
+        #navbar {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
         }
         
-        .header-content {
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -56,22 +56,6 @@
         }
         
         .logo span {
-            color: #1abc9c;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            color: #555;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
             color: #1abc9c;
         }
         
@@ -124,11 +108,14 @@
             align-items: center;
             justify-content: center;
             border: 2px dashed #ddd;
+            overflow: hidden;
         }
         
-        .product-image i {
-            font-size: 60px;
-            color: #ccc;
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
         }
         
         /* VERİ KARTLARI */
@@ -263,9 +250,22 @@
             font-size: 14px;
         }
         
+        .fll-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1abc9c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-left: 15px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .header-content {
+            .nav-container {
                 flex-direction: column;
                 gap: 15px;
             }
@@ -283,17 +283,17 @@
     </style>
 </head>
 <body>
- <nav id="navbar">
+    <!-- NAVBAR -->
+    <nav id="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">
-                <div class="logo-text">Arche<span>Kit</span></div>
+                <i class="fas fa-archway"></i> Arche<span>Kit</span>
             </a>
-             <a href="/arche-kit" class="back-btn">
-                    <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
-                </a>
+            <a href="/arche-kit" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+            </a>
         </div>
     </nav>
-
 
     <!-- ZAMAN BİLGİSİ -->
     <div class="time-info">
@@ -307,8 +307,7 @@
         <!-- ÜRÜN BAŞLIK -->
         <div class="product-header">
             <div class="product-image">
-                <!-- Buraya fotoğraf ekleyeceksin -->
-                <<img src="https://raw.githubusercontent.com/ktl10y/arche-kit/refs/heads/main/Untitled%20design%20(1).png" alt="Ürün Fotoğrafı" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+                <img src="https://raw.githubusercontent.com/ktl10y/arche-kit/refs/heads/main/Untitled%20design%20(1).png" alt="Ürün Fotoğrafı">
             </div>
             <div>
                 <h1 class="product-code">LSP1885#1</h1>
@@ -380,7 +379,8 @@
         </div>
     </div>
 
-     <footer>
+    <!-- FOOTER -->
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-about">
@@ -424,7 +424,7 @@
         </div>
     </footer>
 
-  <script>
+    <script>
         // ZAMAN GÖSTERİMİ
         function updateTime() {
             const now = new Date();
@@ -484,21 +484,6 @@
             // Sayfa yenilenince de güncelle
             window.addEventListener('load', updateTime);
         });
-
-        // SAYFAYI YENİLE BUTONU (opsiyonel)
-        function refreshData() {
-            updateSensorData();
-            updateTime();
-            
-            // Feedback göster
-            const btn = document.querySelector('.refresh-btn');
-            if (btn) {
-                btn.innerHTML = '<i class="fas fa-sync fa-spin"></i> Yenileniyor...';
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-sync"></i> Verileri Yenile';
-                }, 1000);
-            }
-        }
     </script>
 </body>
 </html>
