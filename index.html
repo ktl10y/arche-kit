@@ -12,6 +12,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+#navbar {
+    background: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Logolar */
+.logo-left img,
+.logo-right img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.logo-left {
+    margin-right: auto;
+}
+
+.logo-right {
+    margin-left: auto;
+}
+
+/* ArcheKit Yazısı */
+.logo-center {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.archekit {
+    color: #2c3e50;
+}
+
+.kit {
+    color: #1abc9c;
+}
+</style>
 </head>
 <body>
     <!-- Navigation -->
@@ -21,18 +68,16 @@
                 <div class="logo-text">Arche<span>Kit</span></div>
             </a>
 
-            <!-- Logo Yerleri - Sen linkleri ekleyeceksin -->
-            <div class="nav-logos">
-                <a href="https://raw.githubusercontent.com/ktl10y/arche-kit/refs/heads/main/logo-for-biogelx%20-%20isikschools-logo.png" class="nav-logo-placeholder left-logo">
-                    <!-- Sol Logo - Buraya kendi logonu ekle -->
-                    <i class="fas fa-question-circle"></i>
-                </a>
-                <a href="https://raw.githubusercontent.com/ktl10y/arche-kit/refs/heads/main/logo-for-biogelx%20-%20lightsidepro-logo.png" class="nav-logo-placeholder right-logo">
-                    <!-- Sağ Logo - Buraya kendi logonu ekle -->
-                    <i class="fas fa-question-circle"></i>
-                </a>
-            </div>
-
+           <!-- Sol Logo -->
+        <a href="https://fmv.edu.tr/tr-TR/isik-lisesi/28" class="logo-left">
+            <img src="https://raw.githubusercontent.com/ktl10y/arche-kit/main/isik-logo.png" alt="Sol Logo">
+        </a>
+        
+        
+        <!-- Sağ Logo -->
+        <a href="https://lightsidepro.com/" class="logo-right">
+            <img src="https://raw.githubusercontent.com/ktl10y/arche-kit/main/lightsidepro-logo.png" alt="Sağ Logo">
+        </a>
             <ul class="nav-menu">
                 <li><a href="#hero" class="active">Ana Sayfa</a></li>
                 <li><a href="#features">Özellikler</a></li>
@@ -678,7 +723,7 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 Arche-Kit. Tüm hakları saklıdır. 
                     <span class="fll-tag">
-                        <i class="fas fa-robot"></i> FLL UNARTHED 2025-2026 Projesi
+                        <i class="fas fa-robot"></i> FLL UNEARTHED 2025-2026 Projesi
                     </span>
                 </p>
                 <p style="margin-top: 15px;">
